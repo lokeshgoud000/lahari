@@ -8,11 +8,13 @@
         @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;700&display=swap');
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
             height: 100vh;
+            width: 100vw;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             font-family: 'Poppins', sans-serif;
             overflow: hidden;
             background: url('background.jpg') no-repeat center center fixed;
@@ -22,65 +24,66 @@
         #main-container {
             text-align: center;
             z-index: 10;
-            width: 95%; 
-            max-width: 800px;
-            background: none;
-            box-shadow: none;
+            width: 90%;
+            max-width: 600px;
+            /* Added padding to prevent top cutoff */
+            padding-top: 50px; 
         }
 
-        /* Responsive Neon Text - Shrinks to stay on the page */
         .neon-text {
             font-family: 'Pacifico', cursive;
             color: #fff;
-            /* clamp makes sure it stays readable but small enough for mobile */
-            font-size: clamp(1.5rem, 6vw, 2.8rem); 
-            margin-bottom: 20px;
-            text-shadow: 
-                0 0 10px #fff, 
-                0 0 20px #ff4d6d, 
-                0 0 40px #ff4d6d;
-            line-height: 1.3;
-            padding: 0 10px;
+            /* Smaller font for mobile compatibility */
+            font-size: clamp(1.4rem, 5vw, 2.5rem); 
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px #fff, 0 0 20px #ff4d6d, 0 0 40px #ff4d6d;
+            line-height: 1.4;
         }
 
         .sub-text {
             color: white;
-            font-size: clamp(0.9rem, 4vw, 1.2rem);
-            margin-top: 20px;
+            font-size: clamp(0.8rem, 3vw, 1.1rem);
             font-weight: bold;
-            text-shadow: none;
+            margin-top: 20px;
         }
 
         .buttons { 
             position: relative; 
-            height: 100px; 
+            height: 150px; 
             display: flex; 
             justify-content: center; 
             align-items: center; 
             gap: 20px;
-            margin: 20px 0;
         }
         
         button {
-            padding: 10px 35px;
+            padding: 12px 30px;
             font-size: 1.1rem;
             cursor: pointer;
             border-radius: 50px;
             border: none;
             font-weight: bold;
             transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
-        #yesBtn { background: #ff4d6d; color: white; }
-        #noBtn { background: #666; color: white; position: absolute; z-index: 100; }
+        #yesBtn { background: #ff4d6d; color: white; z-index: 10; }
+        
+        /* Fixed No Button settings */
+        #noBtn { 
+            background: #666; 
+            color: white; 
+            position: relative; /* Changed to relative so it shows up at start */
+            z-index: 10; 
+        }
         
         .hidden { display: none; }
         
         #second-image { 
             width: 250px; 
-            max-width: 65%;
+            max-width: 60%;
             border-radius: 20px; 
-            margin: 10px 0; 
+            margin: 15px 0; 
             border: 4px solid #fff;
             box-shadow: 0 0 30px #ff4d6d;
         }
@@ -89,8 +92,7 @@
             position: fixed;
             top: -50px;
             z-index: 1;
-            font-size: 28px;
-            user-select: none;
+            font-size: 24px;
             pointer-events: none;
             animation: fall linear forwards;
         }
@@ -116,7 +118,7 @@
             <h1 class="neon-text">Yayyyy!! I know you should say Yes 💖💖</h1>
             <img src="photo.jpg" id="second-image" alt="Our Moment">
             <p class="sub-text">You just made me the happiest person ever ❤️</p>
-            <audio id="mySong" loop preload="auto">
+            <audio id="mySong" loop>
                 <source src="song.mp3" type="audio/mpeg">
             </audio>
         </div>
@@ -128,8 +130,11 @@
 
         function moveNoButton() {
             const noBtn = document.getElementById('noBtn');
-            const x = Math.random() * (window.innerWidth - 120);
-            const y = Math.random() * (window.innerHeight - 120);
+            // Change to fixed only after the first move
+            noBtn.style.position = 'fixed'; 
+            
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 100);
             
             noBtn.style.left = x + 'px';
             noBtn.style.top = y + 'px';
@@ -152,7 +157,9 @@
             document.getElementById('page2').classList.remove('hidden');
             
             const audio = document.getElementById('mySong');
-            audio.play();
+            audio.play().catch(() => {
+                console.log("Audio requires manual start on some browsers.");
+            });
 
             setInterval(() => {
                 createEmoji(loveRain[Math.floor(Math.random() * loveRain.length)]);
