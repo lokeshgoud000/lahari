@@ -23,30 +23,33 @@
             text-align: center;
             z-index: 10;
             width: 90%;
-            max-width: 600px;
+            max-width: 700px;
+            /* Completely removed background and shadows from the container */
+            background: none;
+            box-shadow: none;
         }
 
-        /* Sharper Neon Effect - No background box */
+        /* Clean, Readable Neon - Removed all black box shadows */
         .neon-text {
             font-family: 'Pacifico', cursive;
             color: #fff;
-            font-size: 2.8rem;
+            font-size: 3rem;
             margin-bottom: 30px;
-            /* Added dark outline to make it readable against light backgrounds */
+            /* Pure neon glow effect */
             text-shadow: 
-                0 0 5px #fff, 
-                0 0 10px #ff4d6d, 
+                0 0 10px #fff, 
                 0 0 20px #ff4d6d, 
-                2px 2px 5px rgba(0,0,0,0.8);
+                0 0 40px #ff4d6d;
             line-height: 1.4;
         }
 
         .sub-text {
             color: white;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             margin-top: 40px;
             font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
+            /* Subtle text shadow for readability without the "black box" look */
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
         }
 
         .buttons { 
@@ -59,18 +62,18 @@
         }
         
         button {
-            padding: 15px 40px;
-            font-size: 1.3rem;
+            padding: 15px 45px;
+            font-size: 1.4rem;
             cursor: pointer;
             border-radius: 50px;
             border: none;
             font-weight: bold;
             transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
         #yesBtn { background: #ff4d6d; color: white; }
-        #noBtn { background: #444; color: white; position: absolute; z-index: 100; }
+        #noBtn { background: #666; color: white; position: absolute; z-index: 100; }
         
         .hidden { display: none; }
         
@@ -79,14 +82,14 @@
             border-radius: 20px; 
             margin: 20px 0; 
             border: 5px solid #fff;
-            box-shadow: 0 0 25px #ff4d6d;
+            box-shadow: 0 0 30px #ff4d6d;
         }
 
         .emoji {
             position: fixed;
             top: -50px;
             z-index: 1;
-            font-size: 28px;
+            font-size: 30px;
             user-select: none;
             pointer-events: none;
             animation: fall linear forwards;
@@ -113,7 +116,7 @@
             <h1 class="neon-text">Yayyyy!! I know you should say Yes 💖💖</h1>
             <img src="photo.jpg" id="second-image" alt="Our Moment">
             <p class="sub-text">You just made me the happiest person ever ❤️</p>
-            <audio id="mySong" loop>
+            <audio id="mySong" loop preload="auto">
                 <source src="song.mp3" type="audio/mpeg">
             </audio>
         </div>
@@ -125,7 +128,6 @@
 
         function moveNoButton() {
             const noBtn = document.getElementById('noBtn');
-            // Calculate random position within the visible screen area
             const x = Math.random() * (window.innerWidth - 150);
             const y = Math.random() * (window.innerHeight - 150);
             
@@ -150,7 +152,7 @@
             document.getElementById('page2').classList.remove('hidden');
             
             const audio = document.getElementById('mySong');
-            audio.play().catch(e => console.log("Audio play deferred until user interaction"));
+            audio.play();
 
             setInterval(() => {
                 createEmoji(loveRain[Math.floor(Math.random() * loveRain.length)]);
