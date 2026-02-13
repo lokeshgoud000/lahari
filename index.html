@@ -24,18 +24,16 @@
             z-index: 10;
             width: 90%;
             max-width: 700px;
-            /* Completely removed background and shadows from the container */
             background: none;
             box-shadow: none;
         }
 
-        /* Clean, Readable Neon - Removed all black box shadows */
+        /* Clean Neon - NO BLACK SHADOWS at all */
         .neon-text {
             font-family: 'Pacifico', cursive;
             color: #fff;
             font-size: 3rem;
             margin-bottom: 30px;
-            /* Pure neon glow effect */
             text-shadow: 
                 0 0 10px #fff, 
                 0 0 20px #ff4d6d, 
@@ -48,8 +46,8 @@
             font-size: 1.3rem;
             margin-top: 40px;
             font-weight: bold;
-            /* Subtle text shadow for readability without the "black box" look */
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            /* No black shadow here either */
+            text-shadow: none; 
         }
 
         .buttons { 
@@ -69,7 +67,6 @@
             border: none;
             font-weight: bold;
             transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
         #yesBtn { background: #ff4d6d; color: white; }
@@ -152,7 +149,7 @@
             document.getElementById('page2').classList.remove('hidden');
             
             const audio = document.getElementById('mySong');
-            audio.play();
+            audio.play().catch(e => console.log("Autoplay blocked, user must click first"));
 
             setInterval(() => {
                 createEmoji(loveRain[Math.floor(Math.random() * loveRain.length)]);
