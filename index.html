@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lahari for Raghavendra</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            /* Update 'background.jpg' to your actual image name later */
+            background: url('background.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+        #main-container {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            max-width: 90%;
+        }
+        h1 { color: white; text-shadow: 2px 2px 8px rgba(0,0,0,0.5); margin-bottom: 20px; }
+        .buttons { position: relative; height: 100px; }
+        button {
+            padding: 15px 35px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 50px;
+            border: none;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+        #yesBtn { background: #ff4d6d; color: white; margin-right: 10px; }
+        #noBtn { background: #555; color: white; position: absolute; }
+        
+        /* Second Page Content (Hidden at first) */
+        .hidden { display: none; }
+        #second-image { width: 250px; border-radius: 15px; margin: 20px 0; }
+        audio { margin-top: 15px; width: 100%; }
+    </style>
+</head>
+<body>
+
+    <div id="main-container">
+        <div id="page1">
+            <h1>Will you be mine forever, Lahari? ❤️</h1>
+            <div class="buttons">
+                <button id="yesBtn" onclick="showSecondPage()">Yes</button>
+                <button id="noBtn" onmouseover="moveNoButton()" onclick="moveNoButton()">No</button>
+            </div>
+        </div>
+
+        <div id="page2" class="hidden">
+            <h1>I love you! ❤️</h1>
+            <img src="photo.jpg" id="second-image" alt="Our Moment">
+            <p style="color: white;">For you, Lahari...</p>
+            <audio id="mySong" controls>
+                <source src="song.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+    </div>
+
+    <script>
+        function moveNoButton() {
+            const x = Math.random() * (window.innerWidth - 150);
+            const y = Math.random() * (window.innerHeight - 150);
+            const noBtn = document.getElementById('noBtn');
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+            noBtn.style.position = 'fixed';
+        }
+
+        function showSecondPage() {
+            document.getElementById('page1').classList.add('hidden');
+            document.getElementById('page2').classList.remove('hidden');
+            const song = document.getElementById('mySong');
+            song.play(); // Starts the song automatically when she clicks Yes
+        }
+    </script>
+</body>
+</html>
