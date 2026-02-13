@@ -13,6 +13,7 @@
             height: 100vh;
             width: 100vw;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             font-family: 'Poppins', sans-serif;
@@ -21,39 +22,44 @@
             background-size: cover;
         }
 
+        /* This container ensures everything stays centered and visible */
         #main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             text-align: center;
             z-index: 10;
             width: 90%;
             max-width: 600px;
-            /* Added padding to prevent top cutoff */
-            padding-top: 50px; 
+            margin-top: 20px; /* Force space from the very top */
         }
 
         .neon-text {
             font-family: 'Pacifico', cursive;
             color: #fff;
-            /* Smaller font for mobile compatibility */
-            font-size: clamp(1.4rem, 5vw, 2.5rem); 
-            margin-bottom: 30px;
+            font-size: clamp(1.4rem, 5vw, 2.2rem); 
+            margin-bottom: 20px;
             text-shadow: 0 0 10px #fff, 0 0 20px #ff4d6d, 0 0 40px #ff4d6d;
             line-height: 1.4;
         }
 
         .sub-text {
             color: white;
-            font-size: clamp(0.8rem, 3vw, 1.1rem);
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
             font-weight: bold;
-            margin-top: 20px;
+            margin-top: 15px;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
         }
 
         .buttons { 
             position: relative; 
-            height: 150px; 
+            height: 120px; 
             display: flex; 
             justify-content: center; 
             align-items: center; 
             gap: 20px;
+            width: 100%;
         }
         
         button {
@@ -64,23 +70,15 @@
             border: none;
             font-weight: bold;
             transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
-        #yesBtn { background: #ff4d6d; color: white; z-index: 10; }
-        
-        /* Fixed No Button settings */
-        #noBtn { 
-            background: #666; 
-            color: white; 
-            position: relative; /* Changed to relative so it shows up at start */
-            z-index: 10; 
-        }
+        #yesBtn { background: #ff4d6d; color: white; }
+        #noBtn { background: #666; color: white; }
         
         .hidden { display: none; }
         
         #second-image { 
-            width: 250px; 
+            width: 240px; 
             max-width: 60%;
             border-radius: 20px; 
             margin: 15px 0; 
@@ -130,11 +128,10 @@
 
         function moveNoButton() {
             const noBtn = document.getElementById('noBtn');
-            // Change to fixed only after the first move
             noBtn.style.position = 'fixed'; 
             
-            const x = Math.random() * (window.innerWidth - 100);
-            const y = Math.random() * (window.innerHeight - 100);
+            const x = Math.random() * (window.innerWidth - 120);
+            const y = Math.random() * (window.innerHeight - 120);
             
             noBtn.style.left = x + 'px';
             noBtn.style.top = y + 'px';
@@ -157,9 +154,7 @@
             document.getElementById('page2').classList.remove('hidden');
             
             const audio = document.getElementById('mySong');
-            audio.play().catch(() => {
-                console.log("Audio requires manual start on some browsers.");
-            });
+            audio.play();
 
             setInterval(() => {
                 createEmoji(loveRain[Math.floor(Math.random() * loveRain.length)]);
