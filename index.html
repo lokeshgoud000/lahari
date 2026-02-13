@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lahari for Raghavendra</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;700&display=swap');
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             height: 100vh;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
             font-family: 'Poppins', sans-serif;
@@ -18,36 +19,45 @@
             background-size: cover;
         }
 
-        /* Header Style */
-        .header-title {
-            position: absolute;
-            top: 20px;
-            font-size: 1.5rem;
-            color: white;
-            font-weight: bold;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+        #main-container {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+            padding: 40px;
+            border-radius: 30px;
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            max-width: 450px;
             z-index: 10;
         }
 
-        #main-container {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(12px);
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-            max-width: 400px;
-            z-index: 5;
+        /* Neon Animation Effect */
+        .neon-text {
+            font-family: 'Pacifico', cursive;
+            color: #fff;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #ff4d6d, 0 0 82px #ff4d6d, 0 0 92px #ff4d6d;
+            animation: pulsate 1.5s infinite alternate;
         }
 
-        h1 { color: white; text-shadow: 2px 2px 8px rgba(0,0,0,0.5); margin-bottom: 20px; font-size: 1.8rem; }
-        
-        .buttons { position: relative; height: 120px; display: flex; justify-content: center; align-items: center; }
+        @keyframes pulsate {
+            100% { text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 40px #ff4d6d, 0 0 80px #ff4d6d; }
+            0% { text-shadow: 0 0 2px #fff, 0 0 4px #fff, 0 0 6px #fff, 0 0 10px #ff4d6d, 0 0 45px #ff4d6d; }
+        }
+
+        .sub-text {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+            margin-top: 30px;
+            font-style: italic;
+        }
+
+        .buttons { position: relative; height: 100px; display: flex; justify-content: center; align-items: center; gap: 20px; }
         
         button {
-            padding: 15px 35px;
-            font-size: 1.2rem;
+            padding: 12px 30px;
+            font-size: 1.1rem;
             cursor: pointer;
             border-radius: 50px;
             border: none;
@@ -55,31 +65,27 @@
             transition: 0.3s;
         }
 
-        #yesBtn { background: #ff4d6d; color: white; z-index: 10; }
-        #noBtn { background: #555; color: white; position: absolute; transition: 0.1s; }
+        #yesBtn { background: #ff4d6d; color: white; box-shadow: 0 0 15px #ff4d6d; }
+        #noBtn { background: #444; color: white; position: absolute; }
         
         .hidden { display: none; }
         
         #second-image { 
-            width: 200px; 
-            border-radius: 15px; 
+            width: 250px; 
+            border-radius: 20px; 
             margin: 20px 0; 
-            border: 3px solid white;
+            border: 4px solid #ff4d6d;
+            box-shadow: 0 0 20px #ff4d6d;
         }
 
-        .message {
-            color: white;
-            font-size: 1.1rem;
-            line-height: 1.5;
-            text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
-        }
-
-        /* Emoji Rain Effect */
+        /* Rain Effect */
         .emoji {
             position: fixed;
             top: -50px;
             z-index: 1;
             font-size: 24px;
+            user-select: none;
+            pointer-events: none;
             animation: fall linear forwards;
         }
 
@@ -90,26 +96,19 @@
 </head>
 <body>
 
-    <div class="header-title">Lahari for Raghavendra</div>
-
     <div id="main-container">
         <div id="page1">
-            <h1>Will you be my valentiine? ❤️</h1>
+            <h1 class="neon-text">Dear Husband, will you be my Valentine???</h1>
             <div class="buttons">
                 <button id="yesBtn" onclick="showSecondPage()">Yes</button>
-                <button id="noBtn" onmouseover="moveNoButton()" onclick="moveNoButton()">No</button>
+                <button id="noBtn" onmouseover="moveNoButton()">No</button>
             </div>
+            <p class="sub-text">I already know the answer, But I still want to hear it 🥹</p>
         </div>
 
         <div id="page2" class="hidden">
-            <h1>Yes! Forever yours! ❤️</h1>
+            <h1 class="neon-text">Yayyyy!! I know you should say Yes 💖💖</h1>
             <img src="photo.jpg" id="second-image" alt="Our Moment">
-            <div class="message">
-                To my dearest Lahari,<br>
-                I promise to be the husband who always protects you, 
-                cherishes every smile, and walks beside you through every 
-                step of life. You are my home.
-            </div>
             <audio id="mySong" loop>
                 <source src="song.mp3" type="audio/mpeg">
             </audio>
@@ -117,19 +116,17 @@
     </div>
 
     <script>
-        const sadEmojis = ['😢', '😭', '💔', '🥺', '😔'];
-        const loveEmojis = ['❤️', '💖', '✨', '❄️', '💕', '🌹'];
+        const sadEmojis = ['😢', '😭', '💔', '🥺'];
+        const loveRain = ['❤️', '🌹', '❄️', '💖', '✨'];
 
         function moveNoButton() {
             const noBtn = document.getElementById('noBtn');
             const x = Math.random() * (window.innerWidth - 150);
             const y = Math.random() * (window.innerHeight - 150);
-            
             noBtn.style.position = 'fixed';
             noBtn.style.left = x + 'px';
             noBtn.style.top = y + 'px';
 
-            // Create sad emoji effect
             createEmoji(sadEmojis[Math.floor(Math.random() * sadEmojis.length)]);
         }
 
@@ -147,14 +144,13 @@
             document.getElementById('page1').classList.add('hidden');
             document.getElementById('page2').classList.remove('hidden');
             
-            // Start Background Music
             const song = document.getElementById('mySong');
             song.play();
 
-            // Start Love & Snow Rain
+            // Start the Love/Rose/Snow Rain
             setInterval(() => {
-                createEmoji(loveEmojis[Math.floor(Math.random() * loveEmojis.length)]);
-            }, 300);
+                createEmoji(loveRain[Math.floor(Math.random() * loveRain.length)]);
+            }, 200);
         }
     </script>
 </body>
